@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.ParamterMapper" >
+  <resultMap id="BaseResultMap" type="po.Paramter" >
+    <id column="paramter_id" property="paramterId" jdbcType="INTEGER" />
+    <result column="paramenter_name1" property="paramenterName1" jdbcType="VARCHAR" />
+    <result column="paramenter_name2" property="paramenterName2" jdbcType="VARCHAR" />
+    <result column="paramenter_name3" property="paramenterName3" jdbcType="VARCHAR" />
+    <result column="paramenter_name4" property="paramenterName4" jdbcType="VARCHAR" />
+    <result column="paramenter_name5" property="paramenterName5" jdbcType="VARCHAR" />
+    <result column="special" property="special" jdbcType="VARCHAR" />
+    <result column="creat_time" property="creatTime" jdbcType="DATE" />
+    <result column="effective" property="effective" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    paramter_id, paramenter_name1, paramenter_name2, paramenter_name3, paramenter_name4, 
+    paramenter_name5, special, creat_time, effective
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="po.ParamterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from paramter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from paramter
+    where paramter_id = #{paramterId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from paramter
+    where paramter_id = #{paramterId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="po.ParamterExample" >
+    delete from paramter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="po.Paramter" >
+    insert into paramter (paramter_id, paramenter_name1, paramenter_name2, 
+      paramenter_name3, paramenter_name4, paramenter_name5, 
+      special, creat_time, effective
+      )
+    values (#{paramterId,jdbcType=INTEGER}, #{paramenterName1,jdbcType=VARCHAR}, #{paramenterName2,jdbcType=VARCHAR}, 
+      #{paramenterName3,jdbcType=VARCHAR}, #{paramenterName4,jdbcType=VARCHAR}, #{paramenterName5,jdbcType=VARCHAR}, 
+      #{special,jdbcType=VARCHAR}, #{creatTime,jdbcType=DATE}, #{effective,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="po.Paramter" >
+    insert into paramter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paramterId != null" >
+        paramter_id,
+      </if>
+      <if test="paramenterName1 != null" >
+        paramenter_name1,
+      </if>
+      <if test="paramenterName2 != null" >
+        paramenter_name2,
+      </if>
+      <if test="paramenterName3 != null" >
+        paramenter_name3,
+      </if>
+      <if test="paramenterName4 != null" >
+        paramenter_name4,
+      </if>
+      <if test="paramenterName5 != null" >
+        paramenter_name5,
+      </if>
+      <if test="special != null" >
+        special,
+      </if>
+      <if test="creatTime != null" >
+        creat_time,
+      </if>
+      <if test="effective != null" >
+        effective,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paramterId != null" >
+        #{paramterId,jdbcType=INTEGER},
+      </if>
+      <if test="paramenterName1 != null" >
+        #{paramenterName1,jdbcType=VARCHAR},
+      </if>
+      <if test="paramenterName2 != null" >
+        #{paramenterName2,jdbcType=VARCHAR},
+      </if>
+      <if test="paramenterName3 != null" >
+        #{paramenterName3,jdbcType=VARCHAR},
+      </if>
+      <if test="paramenterName4 != null" >
+        #{paramenterName4,jdbcType=VARCHAR},
+      </if>
+      <if test="paramenterName5 != null" >
+        #{paramenterName5,jdbcType=VARCHAR},
+      </if>
+      <if test="special != null" >
+        #{special,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        #{creatTime,jdbcType=DATE},
+      </if>
+      <if test="effective != null" >
+        #{effective,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="po.ParamterExample" resultType="java.lang.Integer" >
+    select count(*) from paramter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update paramter
+    <set >
+      <if test="record.paramterId != null" >
+        paramter_id = #{record.paramterId,jdbcType=INTEGER},
+      </if>
+      <if test="record.paramenterName1 != null" >
+        paramenter_name1 = #{record.paramenterName1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paramenterName2 != null" >
+        paramenter_name2 = #{record.paramenterName2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paramenterName3 != null" >
+        paramenter_name3 = #{record.paramenterName3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paramenterName4 != null" >
+        paramenter_name4 = #{record.paramenterName4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paramenterName5 != null" >
+        paramenter_name5 = #{record.paramenterName5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.special != null" >
+        special = #{record.special,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatTime != null" >
+        creat_time = #{record.creatTime,jdbcType=DATE},
+      </if>
+      <if test="record.effective != null" >
+        effective = #{record.effective,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update paramter
+    set paramter_id = #{record.paramterId,jdbcType=INTEGER},
+      paramenter_name1 = #{record.paramenterName1,jdbcType=VARCHAR},
+      paramenter_name2 = #{record.paramenterName2,jdbcType=VARCHAR},
+      paramenter_name3 = #{record.paramenterName3,jdbcType=VARCHAR},
+      paramenter_name4 = #{record.paramenterName4,jdbcType=VARCHAR},
+      paramenter_name5 = #{record.paramenterName5,jdbcType=VARCHAR},
+      special = #{record.special,jdbcType=VARCHAR},
+      creat_time = #{record.creatTime,jdbcType=DATE},
+      effective = #{record.effective,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="po.Paramter" >
+    update paramter
+    <set >
+      <if test="paramenterName1 != null" >
+        paramenter_name1 = #{paramenterName1,jdbcType=VARCHAR},
+      </if>
+      <if test="paramenterName2 != null" >
+        paramenter_name2 = #{paramenterName2,jdbcType=VARCHAR},
+      </if>
+      <if test="paramenterName3 != null" >
+        paramenter_name3 = #{paramenterName3,jdbcType=VARCHAR},
+      </if>
+      <if test="paramenterName4 != null" >
+        paramenter_name4 = #{paramenterName4,jdbcType=VARCHAR},
+      </if>
+      <if test="paramenterName5 != null" >
+        paramenter_name5 = #{paramenterName5,jdbcType=VARCHAR},
+      </if>
+      <if test="special != null" >
+        special = #{special,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        creat_time = #{creatTime,jdbcType=DATE},
+      </if>
+      <if test="effective != null" >
+        effective = #{effective,jdbcType=INTEGER},
+      </if>
+    </set>
+    where paramter_id = #{paramterId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="po.Paramter" >
+    update paramter
+    set paramenter_name1 = #{paramenterName1,jdbcType=VARCHAR},
+      paramenter_name2 = #{paramenterName2,jdbcType=VARCHAR},
+      paramenter_name3 = #{paramenterName3,jdbcType=VARCHAR},
+      paramenter_name4 = #{paramenterName4,jdbcType=VARCHAR},
+      paramenter_name5 = #{paramenterName5,jdbcType=VARCHAR},
+      special = #{special,jdbcType=VARCHAR},
+      creat_time = #{creatTime,jdbcType=DATE},
+      effective = #{effective,jdbcType=INTEGER}
+    where paramter_id = #{paramterId,jdbcType=INTEGER}
+  </update>
+</mapper>

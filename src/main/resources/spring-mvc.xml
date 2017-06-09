@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:component-scan base-package="controller" />
+    <mvc:annotation-driven>
+        <!--     解决返回String时乱码-->
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/plain;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/view/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 静态资源映射 -->
+    <!--<mvc:resources mapping="/resource/data/**" location="/resource/data/" />-->
+    <!--<mvc:resources mapping="/resource/js/**" location="/resource/js/" />-->
+    <!--<mvc:resources mapping="/resource/css/**" location="/resource/css/" />-->
+    <!--<mvc:resources mapping="/resource/img/**" location="/resource/img/" />-->
+    <!--<mvc:resources mapping="/resource/font/**" location="/resource/font/" />-->
+    <!--<mvc:resources mapping="/resource/fonts/**" location="/resource/fonts/" />-->
+
+</beans>
